@@ -1,15 +1,15 @@
-var i = 1;                  //  set your counter to 1
-function doit(){  if(document.getElementsByClassName('vaccine-box2').length){alert('available');}}
-function myLoop() {         //  create a loop function
+var i = 1;                 
+function doit(){for(j=document.getElementsByClassName('age-limit').length-1;j>=0;j--){if(document.getElementsByClassName('age-limit')[j].parentElement.parentElement.innerText != "Booked\nCOVAXIN\nAge 18+" &&  document.getElementsByClassName('age-limit')[j].parentElement.parentElement.innerText != "Booked\nCOVISHIELD\nAge 18+" && document.getElementsByClassName('age-limit')[j].parentElement.parentElement.innerText != "Booked\nCOVISHIELD\nAge 45+"  && document.getElementsByClassName('age-limit')[j].parentElement.parentElement.innerText != "Booked\nCOVAXIN\nAge 45+"){document.getElementsByClassName('age-limit')[j].parentElement.parentElement.scrollIntoView();document.getElementsByClassName('age-limit')[j].parentElement.previousElementSibling.previousElementSibling.click();stopCodeByerr+='error';return;}}}
+function myLoop() {        
   setTimeout(function() {    doit();
     console.log('try: '+i); document.getElementsByTagName('ion-button')[0].click()     
        
-     //your code here
-    i++;                    //  increment the counter
-    if (i < 100) {           //  if the counter < 100, call the loop function tries 100 times
-      myLoop();             //  ..  again which will trigger another
-    }                       //  ..  setTimeout()
-  }, 5000)
+     //Warning Do not try to understand code
+    i++;                   
+    if (i < 100) {          
+      myLoop();             
+    }                       
+  }, 2000)
 }
 
 myLoop();
