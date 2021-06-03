@@ -99,7 +99,7 @@ def confirm_and_proceed(collected_details):
 
 def save_user_info(filename, details):
     print("\n================================= Save Info =================================\n")
-    save_info = 'y' #input("Would you like to save this as a JSON file for easy use next time?: (y/n Default y): ")
+    save_info = input("Would you like to save this as a JSON file for easy use next time?: (y/n Default y): ")
     save_info = save_info if save_info else 'y'
     if save_info == 'y':
         with open(filename, 'w') as f:
@@ -157,7 +157,8 @@ def collect_user_details(request_header):
 
     print("\n================================= Location Info =================================\n")
     # get search method to use
-    search_option = '2' #input("""Search by Pincode? Or by State/District? \nEnter 1 for Pincode or 2 for State/District. (Default 2) : """)
+    search_option = input(
+        """Search by Pincode? Or by State/District? \nEnter 1 for Pincode or 2 for State/District. (Default 2) : """)
 
     if not search_option or int(search_option) not in [1, 2]:
         search_option = 2
@@ -175,14 +176,14 @@ def collect_user_details(request_header):
     print("\n================================= Additional Info =================================\n")
 
     # Set filter condition
-    minimum_slots = '1' #input(f'Filter out centers with availability less than ? Minimum {len(beneficiary_dtls)} : ')
+    minimum_slots = input(f'Filter out centers with availability less than ? Minimum {len(beneficiary_dtls)} : ')
     if minimum_slots:
         minimum_slots = int(minimum_slots) if int(minimum_slots) >= len(beneficiary_dtls) else len(beneficiary_dtls)
     else:
         minimum_slots = len(beneficiary_dtls)
 
     # Get refresh frequency
-    refresh_freq = '5' #input('How often do you want to refresh the calendar (in seconds)? Default 15. Minimum 5. : ')
+    refresh_freq = input('How often do you want to refresh the calendar (in seconds)? Default 15. Minimum 5. : ')
     refresh_freq = int(refresh_freq) if refresh_freq and int(refresh_freq) >= 5 else 15
 
     # Get search start date
@@ -204,7 +205,7 @@ def collect_user_details(request_header):
 
     print("\n=========== CAUTION! =========== CAUTION! CAUTION! =============== CAUTION! =======\n")
     print("===== BE CAREFUL WITH THIS OPTION! AUTO-BOOKING WILL BOOK THE FIRST AVAILABLE CENTRE, DATE, AND A RANDOM SLOT! =====")
-    auto_book = 'yes-please' #input("Do you want to enable auto-booking? (yes-please or no) Default no: ")
+    auto_book = input("Do you want to enable auto-booking? (yes-please or no) Default no: ")
     auto_book = 'no' if not auto_book else auto_book
 
     collected_details = {
@@ -471,7 +472,7 @@ def check_and_book(request_header, beneficiary_dtls, location_dtls, search_optio
 
 def get_vaccine_preference():
     print("It seems you're trying to find a slot for your first dose. Do you have a vaccine preference?")
-    preference = '0' #input("Enter 0 for No Preference, 1 for COVISHIELD, 2 for COVAXIN, or 3 for SPUTNIK V. Default 0 : ")
+    preference = input("Enter 0 for No Preference, 1 for COVISHIELD, 2 for COVAXIN, or 3 for SPUTNIK V. Default 0 : ")
     preference = int(preference) if preference and int(preference) in [0, 1, 2, 3] else 0
 
     if preference == 1:
@@ -486,7 +487,7 @@ def get_vaccine_preference():
 
 def get_fee_type_preference():
     print("\nDo you have a fee type preference?")
-    preference = '1' #input("Enter 0 for No Preference, 1 for Free Only, or 2 for Paid Only. Default 0 : ")
+    preference = input("Enter 0 for No Preference, 1 for Free Only, or 2 for Paid Only. Default 0 : ")
     preference = int(preference) if preference and int(preference) in [0, 1, 2] else 0
 
     if preference == 1:
@@ -527,7 +528,7 @@ def get_districts(request_header):
             refined_states.append(tmp)
 
         display_table(refined_states)
-        state = int(21)
+        state = int(input('\nEnter State index: '))
         state_id = states[state - 1]['state_id']
 
         districts = requests.get(f'https://cdn-api.co-vin.in/api/v2/admin/location/districts/{state_id}', headers=request_header)
@@ -541,7 +542,7 @@ def get_districts(request_header):
                 refined_districts.append(tmp)
 
             display_table(refined_districts)
-            reqd_districts = '22' #input('\nEnter comma separated index numbers of districts to monitor : ')
+            reqd_districts = input('\nEnter comma separated index numbers of districts to monitor : ')
             districts_idx = [int(idx) - 1 for idx in reqd_districts.split(',')]
             reqd_districts = [{
                 'district_id': item['district_id'],
