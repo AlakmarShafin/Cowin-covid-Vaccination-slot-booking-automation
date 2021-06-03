@@ -5,3 +5,8 @@ svglib==1.0.1
 reportlab==3.5.59
 pyinstaller
 pysimplegui
+time
+requests
+bs4,BeautifulSoup
+json
+base64
